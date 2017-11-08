@@ -23,7 +23,7 @@ ops = {
 	'-': subtract,
 	'*': multiply,
 	'/': divide,
-	'*': exp      } 
+	'^': exp      } 
 
 def calculate(arg):
 	# type 'q', then quit rpn program
