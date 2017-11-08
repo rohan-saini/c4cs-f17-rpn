@@ -15,11 +15,15 @@ def multiply(arg1, arg2):
 def divide(arg1, arg2):
 	return arg1 / arg2
 
+def exp(arg1, arg2):
+	return arg1**arg2
+
 ops = {
 	'+': add,
 	'-': subtract,
 	'*': multiply,
-	'/': divide    } 
+	'/': divide,
+	'*': exp      } 
 
 def calculate(arg):
 	# type 'q', then quit rpn program
