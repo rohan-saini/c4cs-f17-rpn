@@ -1,55 +1,53 @@
-#!/usr/bin/env python
-# coding: utf-8
-# Copyright (c) 2008-2011 Volvox Development Team
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-#
-# Author: Konstantin Lepa <konstantin.lepa@gmail.com>
-
+from setuptools import setup, find_packages
+import sys
 import os
-from distutils.core import setup
 
-prjdir = os.path.dirname(__file__)
+wd = os.path.dirname(os.path.abspath(__file__))
+os.chdir(wd)
+sys.path.insert(1, wd)
 
-def read(filename):
-    return open(os.path.join(prjdir, filename)).read()
+name = 'python-coveralls'
+pkg = __import__('coveralls')
 
-LONG_DESC = read('README.rst') + '\nCHANGES\n=======\n\n' + read('CHANGES.rst')
+author, email = pkg.__author__.rsplit(' ', 1)
+email = email.strip('<>')
 
-from termcolor import VERSION
+version = pkg.__version__
+classifiers = pkg.__classifiers__
 
-setup(name='termcolor',
-      version='.'.join([str(v) for v in VERSION]),
-      description='ANSII Color formatting for output in terminal.',
-      long_description=LONG_DESC,
-      author='Konstantin Lepa',
-      license='MIT',
-      author_email='konstantin.lepa@gmail.com',
-      url='http://pypi.python.org/pypi/termcolor',
-      py_modules=['termcolor'],
-      classifiers=[
-          'Development Status :: 5 - Production/Stable',
-          'Environment :: Console',
-          'Intended Audience :: Developers',
-          'License :: OSI Approved :: MIT License',
-          'Operating System :: OS Independent',
-          'Programming Language :: Python',
-          'Topic :: Terminals'
-          ]
-      )
+readme = open(os.path.join(wd, 'README.rst'), 'r').readlines()
+description = readme[1]
+long_description = ''.join(readme)
+
+reqs = [
+        'PyYAML',
+        'requests',
+        'coverage==4.0.3',
+        'six',
+        ]
+
+if sys.version_info < (2, 7):
+    reqs.append('argparse')
+    reqs.append('subprocess32')
+
+setup(
+    name=name,
+    version=version,
+    author=author,
+    author_email=email,
+    url='http://github.com/z4r/python-coveralls',
+    maintainer=author,
+    maintainer_email=email,
+    description=description,
+    long_description=long_description,
+    classifiers=classifiers,
+    install_requires=reqs,
+    packages=find_packages(),
+    license='Apache License 2.0',
+    keywords='coveralls.io',
+    entry_points={
+        'console_scripts': [
+            'coveralls = coveralls:wear',
+        ],
+    },
+)
