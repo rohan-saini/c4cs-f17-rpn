@@ -15,5 +15,5 @@ class TestBasics(unittest.TestCase):
 		result = rpn.calculate("18 3 /")
 		self.assertEqual(6, result)
 	def test_exp(self):
-		result = rpn.caclulate("2 3 ^")
+		result = rpn.calculate("2 3 ^")
 		self.assertEqual(8, result)
