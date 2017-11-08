@@ -4,7 +4,7 @@ python:
 # command to install dependencies
 install:
   - pip install
-  - pip install coveralls -r test_requirements
+  - pip install coveralls -r test_requirements.txt
 # command to run tests
 script:
   - py.test coveralls/tests.py
