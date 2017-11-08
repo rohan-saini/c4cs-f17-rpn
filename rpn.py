@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import readline
-import sys
-from termcolor import colored, cprint
 
 #operators
 def add(arg1, arg2):
@@ -44,18 +42,7 @@ def calculate(arg):
 			result = function(arg1, arg2)
 			stack.append(result)
 	
-	# print user input and color operators blue
-	for token in arg:
-		try:
-			print(int(token), end="")
-		except ValueError:
-			cprint(token, 'blue', attrs=['bold'], end="")
-	
-	# printing result
-	result = stack.pop()
-	cprint(" = ", 'yellow', attrs=['bold'], end="")
 	print(result)
-	
 	return result
 	
 def main():
