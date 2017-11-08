@@ -3,10 +3,9 @@ python:
   - "3.5"
 # command to install dependencies
 install:
-  - pip install
-  - pip install coveralls -r test_requirements.txt
+  - pip install coveralls 
 # command to run tests
 script:
-  - py.test coveralls/tests.py
+  - coverage run -m unittest 
 after_success:
   - coveralls
