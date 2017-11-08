@@ -3,6 +3,7 @@ import readline
 import sys
 from termcolor import colored, cprint
 
+#operators
 def add(arg1, arg2):
 	return arg1 + arg2
 
